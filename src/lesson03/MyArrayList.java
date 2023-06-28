@@ -62,6 +62,8 @@ public class MyArrayList {
         arr = Arrays.copyOf(arr,capacity); // [current items, new size]
     }
 
+    // something was added
+
     public String toString(){
         StringBuilder sb = new StringBuilder("[");
         for(int i = 0; i < size-1; ++i){
