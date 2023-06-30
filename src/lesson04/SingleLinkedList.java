@@ -98,6 +98,56 @@ public class SingleLinkedList<E> {
         add(size, item); // O(n)
     }
 
+    public E set(int index, E newValue){
+        if(index < 0 || index > size)
+            throw new ArrayIndexOutOfBoundsException();
+
+        Node<E> node = getNode(index);
+        E result = node.data;
+        node.data = newValue;
+        return result;
+    }
+
+    public E remove(int index){
+        if(index < 0 || index > size)
+            throw new ArrayIndexOutOfBoundsException();
+
+        if(index == 0){
+            return removeFirst();
+        }
+        else{
+            Node<E> prevNode = getNode(index - 1);
+            return removeAfter(prevNode);
+        }
+    }
+
+
+    public int findMin(){
+        int min = (int) head.data; // first value
+
+        Node<E> current = head;
+        // traverse
+        while(current != null){
+            if((int)current.data < min)
+                min = (int) current.data;
+
+            current = current.next;
+        }
+
+        return min;
+    }
+
+    public void traverse(){
+        Node<E> current = head;
+        // traverse
+        while(current != null){
+            // ==========
+            // do something
+            //===========
+            current = current.next;
+        }
+
+    }
 
     public int size(){
         return size;
