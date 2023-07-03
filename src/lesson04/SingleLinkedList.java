@@ -1,6 +1,15 @@
 package lesson04;
 
-public class SingleLinkedList<E> {
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
+public class SingleLinkedList<E> implements Iterable<E>{
+
+
+    @Override
+    public Iterator<E> iterator() {
+        return new MyLinkedListIterator<>(head);
+    }
 
     private static class Node<E> {
         private Node next;
@@ -151,6 +160,28 @@ public class SingleLinkedList<E> {
 
     public int size(){
         return size;
+    }
+
+    public static class MyLinkedListIterator<E> implements Iterator<E> {
+
+        Node<E> current;
+
+        public MyLinkedListIterator(Node<E> start) {
+            current = start;
+        }
+        @Override
+        public boolean hasNext() {
+            return current !=null;
+        }
+
+        @Override
+        public E next() {
+            if(current == null)
+                throw new NoSuchElementException();
+            E hand = current.data;
+            current = current.next;
+            return hand;
+        }
     }
 
     public String toString() {

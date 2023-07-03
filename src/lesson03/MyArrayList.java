@@ -57,6 +57,14 @@ public class MyArrayList {
         return this.size;
     }
 
+    public String get(int index){
+        // Check if the value is within bounds
+        if(index < 0 || index >= size)
+            throw new ArrayIndexOutOfBoundsException();
+
+        return arr[index];
+    }
+
     private void reallocate(){
         capacity = capacity * 2;
         arr = Arrays.copyOf(arr,capacity); // [current items, new size]
