@@ -1,16 +1,47 @@
 package lesson04;
 
+import lesson06.ListI;
+import lesson06.StackI;
+
+import java.util.EmptyStackException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class SingleLinkedList<E> implements Iterable<E>{
+public class SingleLinkedList<E> implements StackI<E>, Iterable<E>, ListI<E> {
 
+    @Override
+    public E push(E obj) {
+        addFirst(obj);
+        return head.data;
+    }
+
+    @Override
+    public E peek() {
+        if(isEmpty())
+            throw new EmptyStackException();
+
+        return head.data;
+    }
+
+    @Override
+    public E pop() {
+        if(isEmpty())
+            throw new EmptyStackException();
+
+        E hand = head.data;
+        removeFirst();
+        return hand;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return head == null;
+    }
 
     @Override
     public Iterator<E> iterator() {
         return new MyLinkedListIterator<>(head);
     }
-
     private static class Node<E> {
         private Node next;
         private E data;
@@ -162,26 +193,46 @@ public class SingleLinkedList<E> implements Iterable<E>{
         return size;
     }
 
-    public static class MyLinkedListIterator<E> implements Iterator<E> {
-
-        Node<E> current;
+    // LinkedListIterator class
+    private static class MyLinkedListIterator<E> implements Iterator<E> {
+        private Node<E> current;
+        private Node<E> previous;
+        private boolean removeCalled;
 
         public MyLinkedListIterator(Node<E> start) {
-            current = start;
+            this.current = start;
+            this.removeCalled = false;
         }
+
         @Override
         public boolean hasNext() {
-            return current !=null;
+            return current != null;
         }
 
         @Override
         public E next() {
-            if(current == null)
+            if (!hasNext()) {
                 throw new NoSuchElementException();
-            E hand = current.data;
+            }
+            E data = current.data;
+            previous = current;
             current = current.next;
-            return hand;
+            removeCalled = false;
+            return data;
         }
+
+//        @Override
+//        public void remove() {
+//            if (removeCalled || previous == null) {
+//                throw new IllegalStateException();
+//            }
+//            if (previous == head) {
+//                head = head.next;
+//            } else {
+//                previous.next = current;
+//            }
+//            removeCalled = true;
+//        }
     }
 
     public String toString() {
