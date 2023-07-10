@@ -163,17 +163,13 @@ public class SingleLinkedList<E> implements StackI<E>, Iterable<E>, ListI<E> {
 
 
     public int findMin(){
-        int min = (int) head.data; // first value
-
+        int min = (int) head.data;
         Node<E> current = head;
-        // traverse
         while(current != null){
             if((int)current.data < min)
                 min = (int) current.data;
-
             current = current.next;
         }
-
         return min;
     }
 
@@ -215,9 +211,7 @@ public class SingleLinkedList<E> implements StackI<E>, Iterable<E>, ListI<E> {
                 throw new NoSuchElementException();
             }
             E data = current.data;
-            previous = current;
             current = current.next;
-            removeCalled = false;
             return data;
         }
 
