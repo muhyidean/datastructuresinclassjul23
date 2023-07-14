@@ -23,4 +23,37 @@ public class Employee implements Comparable{
         else
             return 0;
     }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", hireDate=" + hireDate +
+                '}';
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getHireDate() {
+        return hireDate;
+    }
+
+    public void setHireDate(int hireDate) {
+        this.hireDate = hireDate;
+    }
 }

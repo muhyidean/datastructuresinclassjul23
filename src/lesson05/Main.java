@@ -6,6 +6,10 @@ public class Main {
 
     public static void main(String[] args) {
 
+        Employee emp = new Employee(111,"dean",10);
+
+        System.out.println(emp);
+
         List<Integer> nums = new LinkedList<>( Arrays.asList(5,1,9,3,6) );
 
 
